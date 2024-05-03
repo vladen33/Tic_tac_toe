@@ -12,4 +12,24 @@ class Board:
     def display(self):
         for row in self.board:
             print(' | '.join(row))
-            print('-' * 9) 
+            print('-' * 9)
+
+    def is_board_full(self):
+        for i in range(self.field_size):
+            for j in range(self.field_size):
+                if self.board[i][j] == ' ':
+                    return False
+        return True
+
+    def check_win(self, player):
+        for i in range(self.field_size):           
+            if all([self.board[i][j] == player for j in range(self.field_size)]):
+                return True
+        for j in range(self.field_size):           
+            if all([self.board[i][j] == player for i in range(self.field_size)]):
+                return True 
+        if all([self.board[k][k] == player for k in range(self.field_size)]):
+            return True           
+        if all([self.board[k][self.field_size - k - 1] == player for k in range(self.field_size)]):
+            return True 
+        return False
