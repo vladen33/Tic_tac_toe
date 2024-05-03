@@ -45,11 +45,18 @@ def main():
         if game.check_win(current_player):
             print(f'Победили {current_player}!')
             running = False
+            save_result(f'Победили {current_player}\n')
         if game.is_board_full():
             print('Ничья!')
             running = False
+            save_result('Ничья')
 
-        current_player = 'O' if current_player == 'X' else 'X'
+        current_player = '0' if current_player == 'X' else 'X'
+
+
+def save_result(res):
+    with open('results.txt', 'a', encoding='utf-8') as f:
+        f.write(res)
 
 
 if __name__ == '__main__':
